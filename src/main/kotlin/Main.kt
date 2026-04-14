@@ -6,6 +6,7 @@ fun main() {
     }
 
     hilo.start()
+    hilo.join()
 
     println("Fin del programa")
 }
