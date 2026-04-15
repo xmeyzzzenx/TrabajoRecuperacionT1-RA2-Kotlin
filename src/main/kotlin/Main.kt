@@ -8,6 +8,9 @@ fun main() {
 
     println("\nPRODUCTOR - CONSUMIDOR:")
     productorConsumidor()
+
+    println("\nERRORES:")
+    demoErrores()
 }
 
 // 1. HILO BASICO
@@ -108,4 +111,19 @@ fun productorConsumidor() {
 
     productor.join()
     consumidor.join()
+}
+
+fun demoErrores() {
+
+    val hiloError = Thread {
+        try {
+            println("Hilo con error iniciado")
+            throw Exception("Error simulado")
+        } catch (e: Exception) {
+            println("Error capturado: ${e.message}")
+        }
+    }
+
+    hiloError.start()
+    hiloError.join()
 }
