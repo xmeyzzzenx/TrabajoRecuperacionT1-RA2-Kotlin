@@ -5,6 +5,9 @@ fun main() {
 
     println("\nSECUENCIAL VS CONCURRENTE:")
     compararSecuencialVsConcurrente()
+
+    println("\nPRODUCTOR - CONSUMIDOR:")
+    productorConsumidor()
 }
 
 // 1. HILO BASICO
@@ -24,9 +27,10 @@ fun ejemploHiloBasico(){
 }
 
 // 2. SECUENCIAL VS CONCURRENTE
+
 fun compararSecuencialVsConcurrente() {
 
-    println("Secuencial:")
+    println("\nSecuencial:")
 
     val inicioSecuencial = System.currentTimeMillis()
 
@@ -66,4 +70,36 @@ fun tarea(nombre: String) {
     println("Tarea $nombre iniciada")
     Thread.sleep(2000)
     println("Tarea $nombre terminada")
+}
+
+// 3. PRODUCTOR - CONSUMIDOR
+
+fun productorConsumidor() {
+    val lista = mutableListOf<Int>()
+
+    val productor = Thread {
+        for (i in 1..5) {
+            println("Produciendo $i")
+            lista.add(i)
+            Thread.sleep(500)
+        }
+    }
+
+    val consumidor = Thread {
+        for (i in 1..5) {
+            Thread.sleep(1000)
+            if (lista.isNotEmpty()) {
+                val valor = lista.removeAt(0)
+                println("Consumiendo $valor")
+            } else {
+                println("No hay datos para consumir")
+            }
+        }
+    }
+
+    productor.start()
+    consumidor.start()
+
+    productor.join()
+    consumidor.join()
 }
