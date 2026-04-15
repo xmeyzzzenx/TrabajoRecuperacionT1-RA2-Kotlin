@@ -8,16 +8,16 @@ fun main() {
     println("=== HILO BASICO ===")
     demoHiloBasico()
 
-    println("=== SECUENCIAL VS CONCURRENTE (HILOS) ===")
+    println("\n=== SECUENCIAL VS CONCURRENTE (HILOS) ===")
     demoComparacionHilos()
 
-    println("=== PRODUCTOR-CONSUMIDOR (HILOS) ===")
+    println("\n=== PRODUCTOR-CONSUMIDOR (HILOS) ===")
     demoComunicacionHilos()
 
-    println("\nERRORES:")
-    demoErrores()
+    println("\n=== ERRORES (HILOS) ===")
+    demoErroresHilos()
 
-    println("\nCORRUTINAS")
+    println("\n=== CORRUTINAS BÁSICAS")
     demoCorrutina()
 }
 
@@ -116,7 +116,11 @@ fun demoComunicacionHilos() {
     println("Comunicación finalizada")
 }
 
-fun demoErrores() {
+
+// ====================================
+// 4. ERRORES (HILOS)
+// ====================================
+fun demoErroresHilos() {
 
     val hiloError = Thread {
         try {
@@ -129,6 +133,8 @@ fun demoErrores() {
 
     hiloError.start()
     hiloError.join()
+
+    println("Hilo de error finalizado")
 }
 
 // 5.CORRUTINAS
