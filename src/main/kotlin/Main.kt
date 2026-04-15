@@ -1,6 +1,5 @@
 import kotlinx.coroutines.*
 
-
 // ==============================
 // MAIN
 // ==============================
@@ -9,8 +8,8 @@ fun main() {
     println("=== HILO BASICO ===")
     demoHiloBasico()
 
-    println("\nSECUENCIAL VS CONCURRENTE:")
-    compararSecuencialVsConcurrente()
+    println("=== SECUENCIAL VS CONCURRENTE (HILOS) ===")
+    demoComparacionHilos()
 
     println("\nPRODUCTOR - CONSUMIDOR:")
     productorConsumidor()
@@ -25,8 +24,8 @@ fun main() {
 // ==============================
 // 1. HILO BASICO
 // ==============================
-
 fun demoHiloBasico() {
+
     println("Inicio del programa")
 
     val hilo = Thread {
@@ -39,32 +38,23 @@ fun demoHiloBasico() {
     println("Hilo finalizado")
 }
 
-// 2. SECUENCIAL VS CONCURRENTE
-
-fun compararSecuencialVsConcurrente() {
-
-    println("\nSecuencial:")
+// ====================================
+// 2. SECUENCIAL VS CONCURRENTE (HILOS)
+// ====================================
+fun demoComparacionHilos() {
 
     val inicioSecuencial = System.currentTimeMillis()
 
-    tarea("A")
-    tarea("B")
+    tareaHilo("A")
+    tareaHilo("B")
 
     val finSecuencial = System.currentTimeMillis()
-
     println("Tiempo secuencial: ${finSecuencial - inicioSecuencial} ms")
-
-    println("\nConcurrente:")
 
     val inicioConcurrente = System.currentTimeMillis()
 
-    val hilo1 = Thread {
-        tarea("A")
-    }
-
-    val hilo2 = Thread {
-        tarea("B")
-    }
+    val hilo1 = Thread { tareaHilo("A") }
+    val hilo2 = Thread { tareaHilo("B") }
 
     hilo1.start()
     hilo2.start()
@@ -73,16 +63,16 @@ fun compararSecuencialVsConcurrente() {
     hilo2.join()
 
     val finConcurrente = System.currentTimeMillis()
-
     println("Tiempo concurrente: ${finConcurrente - inicioConcurrente} ms")
 }
 
-// FUNCION TAREA
-
-fun tarea(nombre: String) {
+// ====================================
+// FUNCION TAREA (HILOS)
+// ====================================
+fun tareaHilo(nombre: String) {
     println("Tarea $nombre iniciada")
     Thread.sleep(2000)
-    println("Tarea $nombre terminada")
+    println("Tarea $nombre finalizada")
 }
 
 // 3. PRODUCTOR - CONSUMIDOR
