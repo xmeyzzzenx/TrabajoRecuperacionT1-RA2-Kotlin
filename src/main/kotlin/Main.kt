@@ -1,9 +1,13 @@
 import kotlinx.coroutines.*
 
+
+// ==============================
+// MAIN
+// ==============================
 fun main() {
 
-    println("HILO BASICO:")
-    ejemploHiloBasico()
+    println("=== HILO BASICO ===")
+    demoHiloBasico()
 
     println("\nSECUENCIAL VS CONCURRENTE:")
     compararSecuencialVsConcurrente()
@@ -18,20 +22,21 @@ fun main() {
     demoCorrutina()
 }
 
+// ==============================
 // 1. HILO BASICO
+// ==============================
 
-fun ejemploHiloBasico(){
-
+fun demoHiloBasico() {
     println("Inicio del programa")
 
     val hilo = Thread {
-        println("Hola soy un hilo")
+        println("Ejecutando hilo...")
     }
 
     hilo.start()
     hilo.join()
 
-    println("Fin del programa")
+    println("Hilo finalizado")
 }
 
 // 2. SECUENCIAL VS CONCURRENTE
