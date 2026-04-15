@@ -1,3 +1,5 @@
+import kotlinx.coroutines.*
+
 fun main() {
 
     println("HILO BASICO:")
@@ -11,6 +13,9 @@ fun main() {
 
     println("\nERRORES:")
     demoErrores()
+
+    println("\nCORRUTINAS")
+    demoCorrutina()
 }
 
 // 1. HILO BASICO
@@ -126,4 +131,19 @@ fun demoErrores() {
 
     hiloError.start()
     hiloError.join()
+}
+
+// 5.CORRUTINAS
+fun demoCorrutina() = runBlocking {
+
+    println("Corrutina iniciada")
+
+    val job = launch {
+        delay(1000)
+        println("Trabajo dentro de la corrutina")
+    }
+
+    job.join()
+
+    println("Corrutina terminada")
 }
