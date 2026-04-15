@@ -17,8 +17,8 @@ fun main() {
     println("\n=== ERRORES (HILOS) ===")
     demoErroresHilos()
 
-    println("\n=== CORRUTINAS BÁSICAS")
-    demoCorrutina()
+    println("\n=== CORRUTINAS BÁSICAS ===")
+    demoCorrutinaBasica()
 }
 
 // ==============================
@@ -137,17 +137,15 @@ fun demoErroresHilos() {
     println("Hilo de error finalizado")
 }
 
-// 5.CORRUTINAS
-fun demoCorrutina() = runBlocking {
-
-    println("Corrutina iniciada")
-
-    val job = launch {
+// ====================================
+// 5. CORRUTINA BÁSICA
+// ====================================
+fun demoCorrutinaBasica() = runBlocking {
+    val trabajo = async {
         delay(1000)
-        println("Trabajo dentro de la corrutina")
+        "Resultado de la corrutina"
     }
 
-    job.join()
-
-    println("Corrutina terminada")
+    println(trabajo.await())
+    println("Corrutina corrutina")
 }
