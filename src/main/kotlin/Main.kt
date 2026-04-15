@@ -1,4 +1,31 @@
 fun main() {
+
+    println("HILO BASICO:")
+    ejemploHiloBasico()
+
+    println("\nSECUENCIAL VS CONCURRENTE:")
+    compararSecuencialVsConcurrente()
+}
+
+// 1. HILO BASICO
+
+fun ejemploHiloBasico(){
+
+    println("Inicio del programa")
+
+    val hilo = Thread {
+        println("Hola soy un hilo")
+    }
+
+    hilo.start()
+    hilo.join()
+
+    println("Fin del programa")
+}
+
+// 2. SECUENCIAL VS CONCURRENTE
+fun compararSecuencialVsConcurrente() {
+
     println("Secuencial:")
 
     val inicioSecuencial = System.currentTimeMillis()
@@ -32,6 +59,8 @@ fun main() {
 
     println("Tiempo concurrente: ${finConcurrente - inicioConcurrente} ms")
 }
+
+// FUNCION TAREA
 
 fun tarea(nombre: String) {
     println("Tarea $nombre iniciada")
