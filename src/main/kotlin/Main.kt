@@ -75,12 +75,16 @@ fun tarea(nombre: String) {
 // 3. PRODUCTOR - CONSUMIDOR
 
 fun productorConsumidor() {
+
     val lista = mutableListOf<Int>()
+    val lock = Object()
 
     val productor = Thread {
         for (i in 1..5) {
-            println("Produciendo $i")
-            lista.add(i)
+            synchronized(lock) {
+                println("Produciendo $i")
+                lista.add(i)
+            }
             Thread.sleep(500)
         }
     }
@@ -88,11 +92,13 @@ fun productorConsumidor() {
     val consumidor = Thread {
         for (i in 1..5) {
             Thread.sleep(1000)
-            if (lista.isNotEmpty()) {
-                val valor = lista.removeAt(0)
-                println("Consumiendo $valor")
-            } else {
-                println("No hay datos para consumir")
+            synchronized(lock) {
+                if (lista.isNotEmpty()) {
+                    val valor = lista.removeAt(0)
+                    println("Consumiendo $valor")
+                } else {
+                    println("No hay datos para consumir")
+                }
             }
         }
     }
