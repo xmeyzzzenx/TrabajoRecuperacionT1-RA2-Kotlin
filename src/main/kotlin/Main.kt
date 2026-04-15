@@ -11,8 +11,8 @@ fun main() {
     println("=== SECUENCIAL VS CONCURRENTE (HILOS) ===")
     demoComparacionHilos()
 
-    println("\nPRODUCTOR - CONSUMIDOR:")
-    productorConsumidor()
+    println("=== PRODUCTOR-CONSUMIDOR (HILOS) ===")
+    demoComunicacionHilos()
 
     println("\nERRORES:")
     demoErrores()
@@ -75,9 +75,10 @@ fun tareaHilo(nombre: String) {
     println("Tarea $nombre finalizada")
 }
 
-// 3. PRODUCTOR - CONSUMIDOR
-
-fun productorConsumidor() {
+// ====================================
+// 3. PRODUCTOR-CONSUMIDOR (HILOS)
+// ====================================
+fun demoComunicacionHilos() {
 
     val lista = mutableListOf<Int>()
     val lock = Object()
@@ -100,7 +101,7 @@ fun productorConsumidor() {
                     val valor = lista.removeAt(0)
                     println("Consumiendo $valor")
                 } else {
-                    println("No hay datos para consumir")
+                    println("Lista vacía")
                 }
             }
         }
@@ -111,6 +112,8 @@ fun productorConsumidor() {
 
     productor.join()
     consumidor.join()
+
+    println("Comunicación finalizada")
 }
 
 fun demoErrores() {
