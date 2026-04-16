@@ -1,4 +1,5 @@
 import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.Channel
 
 // ==============================
 // MAIN
@@ -22,6 +23,9 @@ fun main() {
 
     println("\n=== SECUENCIAL VS CONCURRENTE (CORRUTINAS) ===")
     demoComparacionCorrutinas()
+
+    println("\n=== PRODUCTOR - CONSUMIDOR (CORRUTINAS) ===")
+    demoComunicacionCorrutinas()
 }
 
 // ==============================
@@ -181,4 +185,28 @@ suspend fun tareaCorrutina(nombre: String) {
     println("Tarea $nombre iniciada")
     delay(2000)
     println("Tarea $nombre finalizada")
+}
+
+// ====================================
+// 7. PRODUCTOR-CONSUMIDOR (CORRUTINAS)
+// ====================================
+fun demoComunicacionCorrutinas() = runBlocking {
+    val canal = Channel<Int>()
+
+    launch {
+        for (i in 1..5) {
+            println("Produciendo $i")
+            canal.send(i)
+            delay(500)
+        }
+        canal.close()
+
+    }
+
+    launch {
+        for (valor in canal) {
+            println("Consumiendo $valor")
+            delay(1000)
+        }
+    }
 }
