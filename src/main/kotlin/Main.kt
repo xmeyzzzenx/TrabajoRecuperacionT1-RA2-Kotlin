@@ -19,6 +19,9 @@ fun main() {
 
     println("\n=== CORRUTINAS BÁSICAS ===")
     demoCorrutinaBasica()
+
+    println("\n=== SECUENCIAL VS CONCURRENTE (CORRUTINAS) ===")
+    demoComparacionCorrutinas()
 }
 
 // ==============================
@@ -147,5 +150,35 @@ fun demoCorrutinaBasica() = runBlocking {
     }
 
     println(trabajo.await())
-    println("Corrutina corrutina")
+    println("Corrutina finalizada")
+}
+
+// =========================================
+// 6. SECUENCIAL VS CONCURRENTE (CORRUTINAS)
+// =========================================
+fun demoComparacionCorrutinas() = runBlocking {
+    val inicioSecuencial = System.currentTimeMillis()
+
+    tareaCorrutina("A")
+    tareaCorrutina("B")
+
+    val finSecuencial = System.currentTimeMillis()
+    println("Tiempo secuencial corrutinas: ${finSecuencial - inicioSecuencial} ms")
+
+    val inicioConcurrente = System.currentTimeMillis()
+
+    val job1 = async { tareaCorrutina("A") }
+    val job2 = async { tareaCorrutina("B") }
+
+    job1.await()
+    job2.await()
+
+    val finConcurrente = System.currentTimeMillis()
+    println("Tiempo concurrente corrutinas: ${finConcurrente - inicioConcurrente} ms")
+}
+
+suspend fun tareaCorrutina(nombre: String) {
+    println("Tarea $nombre iniciada")
+    delay(2000)
+    println("Tarea $nombre finalizada")
 }
