@@ -18,14 +18,17 @@ fun main() {
     println("\n=== ERRORES (HILOS) ===")
     demoErroresHilos()
 
-    println("\n=== CORRUTINAS BÁSICAS ===")
+    println("\n=== CORRUTINA BASICA ===")
     demoCorrutinaBasica()
 
     println("\n=== SECUENCIAL VS CONCURRENTE (CORRUTINAS) ===")
     demoComparacionCorrutinas()
 
-    println("\n=== PRODUCTOR - CONSUMIDOR (CORRUTINAS) ===")
+    println("\n=== PRODUCTOR-CONSUMIDOR (CORRUTINAS) ===")
     demoComunicacionCorrutinas()
+
+    println("\n=== ERRORES (CORRUTINAS) ===")
+    demoErroresCorrutinas()
 }
 
 // ==============================
@@ -50,6 +53,8 @@ fun demoHiloBasico() {
 // ====================================
 fun demoComparacionHilos() {
 
+    println("\n--- Ejecución Secuencial ---")
+
     val inicioSecuencial = System.currentTimeMillis()
 
     tareaHilo("A")
@@ -57,6 +62,8 @@ fun demoComparacionHilos() {
 
     val finSecuencial = System.currentTimeMillis()
     println("Tiempo secuencial: ${finSecuencial - inicioSecuencial} ms")
+
+    println("\n--- Ejecución Concurrente ---")
 
     val inicioConcurrente = System.currentTimeMillis()
 
@@ -120,7 +127,7 @@ fun demoComunicacionHilos() {
     productor.join()
     consumidor.join()
 
-    println("Comunicación finalizada")
+    println("Comunicacion finalizada")
 }
 
 
@@ -132,7 +139,7 @@ fun demoErroresHilos() {
     val hiloError = Thread {
         try {
             println("Hilo con error iniciado")
-            throw Exception("Error simulado")
+            throw Exception("Error simulado en hilo")
         } catch (e: Exception) {
             println("Error capturado: ${e.message}")
         }
@@ -148,12 +155,17 @@ fun demoErroresHilos() {
 // 5. CORRUTINA BÁSICA
 // ====================================
 fun demoCorrutinaBasica() = runBlocking {
+
+    println("Inicio de la corrutina")
+
     val trabajo = async {
         delay(1000)
+        println("Ejecutando corrutina...")
         "Resultado de la corrutina"
     }
 
     println(trabajo.await())
+
     println("Corrutina finalizada")
 }
 
@@ -161,6 +173,9 @@ fun demoCorrutinaBasica() = runBlocking {
 // 6. SECUENCIAL VS CONCURRENTE (CORRUTINAS)
 // =========================================
 fun demoComparacionCorrutinas() = runBlocking {
+
+    println("\n--- Corrutinas Secuencial ---")
+
     val inicioSecuencial = System.currentTimeMillis()
 
     tareaCorrutina("A")
@@ -168,6 +183,8 @@ fun demoComparacionCorrutinas() = runBlocking {
 
     val finSecuencial = System.currentTimeMillis()
     println("Tiempo secuencial corrutinas: ${finSecuencial - inicioSecuencial} ms")
+
+    println("\n--- Corrutinas Concurrente ---")
 
     val inicioConcurrente = System.currentTimeMillis()
 
@@ -191,22 +208,46 @@ suspend fun tareaCorrutina(nombre: String) {
 // 7. PRODUCTOR-CONSUMIDOR (CORRUTINAS)
 // ====================================
 fun demoComunicacionCorrutinas() = runBlocking {
+
     val canal = Channel<Int>()
 
-    launch {
+    val productor = launch {
         for (i in 1..5) {
             println("Produciendo $i")
             canal.send(i)
             delay(500)
         }
         canal.close()
-
     }
 
-    launch {
+    val consumidor = launch {
         for (valor in canal) {
             println("Consumiendo $valor")
             delay(1000)
         }
     }
+
+    productor.join()
+    consumidor.join()
+
+    println("Comunicación finalizada")
+}
+
+// ====================================
+// 8. ERRORES (CORRUTINAS)
+// ====================================
+fun demoErroresCorrutinas() = runBlocking {
+
+    val job = launch {
+        try {
+            println("Corrutina con error iniciada")
+            throw Exception("Error simulado en corrutina")
+        } catch (e: Exception) {
+            println("Error capturado: ${e.message}")
+        }
+    }
+
+    job.join()
+
+    println("Corrutina de error finalizada")
 }
