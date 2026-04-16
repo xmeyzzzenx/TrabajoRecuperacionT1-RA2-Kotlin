@@ -45,7 +45,7 @@ fun demoHiloBasico() {
     hilo.start()
     hilo.join()
 
-    println("Hilo finalizado")
+    println("Hilo finalizado correctamente")
 }
 
 // ====================================
@@ -53,7 +53,7 @@ fun demoHiloBasico() {
 // ====================================
 fun demoComparacionHilos() {
 
-    println("\n--- Ejecución Secuencial ---")
+    println("\n--- Ejecucion Secuencial (Hilos) ---")
 
     val inicioSecuencial = System.currentTimeMillis()
 
@@ -63,7 +63,7 @@ fun demoComparacionHilos() {
     val finSecuencial = System.currentTimeMillis()
     println("Tiempo secuencial: ${finSecuencial - inicioSecuencial} ms")
 
-    println("\n--- Ejecución Concurrente ---")
+    println("\n--- Ejecucion Concurrente (Hilos) ---")
 
     val inicioConcurrente = System.currentTimeMillis()
 
@@ -127,7 +127,7 @@ fun demoComunicacionHilos() {
     productor.join()
     consumidor.join()
 
-    println("Comunicacion finalizada")
+    println("Comunicacion finalizada correctamente")
 }
 
 
@@ -148,7 +148,7 @@ fun demoErroresHilos() {
     hiloError.start()
     hiloError.join()
 
-    println("Hilo de error finalizado")
+    println("Hilo finalizado con control de errores")
 }
 
 // ====================================
@@ -166,7 +166,7 @@ fun demoCorrutinaBasica() = runBlocking {
 
     println(trabajo.await())
 
-    println("Corrutina finalizada")
+    println("Corrutina finalizada correctamente")
 }
 
 // =========================================
@@ -174,7 +174,7 @@ fun demoCorrutinaBasica() = runBlocking {
 // =========================================
 fun demoComparacionCorrutinas() = runBlocking {
 
-    println("\n--- Corrutinas Secuencial ---")
+    println("\n--- Ejecucion Secuencial (Corrutinas) ---")
 
     val inicioSecuencial = System.currentTimeMillis()
 
@@ -184,7 +184,7 @@ fun demoComparacionCorrutinas() = runBlocking {
     val finSecuencial = System.currentTimeMillis()
     println("Tiempo secuencial corrutinas: ${finSecuencial - inicioSecuencial} ms")
 
-    println("\n--- Corrutinas Concurrente ---")
+    println("\n--- Ejecucion Concurrente (Corrutinas) ---")
 
     val inicioConcurrente = System.currentTimeMillis()
 
@@ -230,7 +230,7 @@ fun demoComunicacionCorrutinas() = runBlocking {
     productor.join()
     consumidor.join()
 
-    println("Comunicación finalizada")
+    println("Comunicacion finalizada correctamente")
 }
 
 // ====================================
@@ -249,5 +249,5 @@ fun demoErroresCorrutinas() = runBlocking {
 
     job.join()
 
-    println("Corrutina de error finalizada")
+    println("Corrutina finalizada con control de errores")
 }
