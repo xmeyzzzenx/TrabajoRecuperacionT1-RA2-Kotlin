@@ -1,49 +1,56 @@
-# Trabajo Recuperación RA2 - PSP
+# TrabajoRecuperacionT1-RA2-Kotlin
+## Autora: Ximena Meyzen Calderon - 2DAM - PSP
 
-## Descripción
+---
 
-Este proyecto consiste en un programa en Kotlin donde se trabajan hilos y corrutinas para ver cómo funcionan y comparar su comportamiento.
+## Descripcion
+
+Programa en Kotlin donde trabajo con hilos y corrutinas para ver
+como funcionan y comparar su comportamiento. Esta hecho con ejemplos
+practicos para entender bien la diferencia entre ejecutar tareas
+de forma secuencial y concurrente.
 
 ---
 
 ## Objetivo
 
-El objetivo es aprender a usar hilos y corrutinas mediante ejemplos prácticos:
+El objetivo es aprender a usar hilos y corrutinas mediante ejemplos reales:
 
-* Ejecutar tareas de forma secuencial y concurrente
-* Comunicar procesos (productor-consumidor)
-* Controlar errores durante la ejecución
-
----
-
-## Qué incluye el programa
-
-El programa tiene varios ejemplos:
-
-### Hilos
-
-* Creación de un hilo básico
-* Ejecución secuencial vs concurrente
-* Productor-consumidor usando lista y `synchronized`
-* Manejo de errores en hilos
-
-### Corrutinas
-
-* Corrutina básica
-* Ejecución secuencial vs concurrente
-* Productor-consumidor usando `Channel`
-* Manejo de errores en corrutinas
+- Lanzar hilos y corrutinas y ver como se comportan
+- Comparar ejecucion secuencial vs concurrente y medir tiempos
+- Implementar el patron productor-consumidor con hilos y corrutinas
+- Controlar errores para que el programa no se caiga
 
 ---
 
-## Tecnologías utilizadas
+## Que incluye el programa
 
-* Kotlin
-* Librería `kotlinx.coroutines`
+El programa esta dividido en dos secciones:
+
+### Seccion 1: Hilos
+
+- Hilo basico con Thread, con nombre para identificarlo en consola
+- Secuencial vs concurrente midiendo tiempos reales
+- Productor-consumidor usando lista compartida y synchronized como candado
+- Gestion de errores con try-catch dentro del hilo
+
+### Seccion 2: Corrutinas
+
+- Corrutina basica con launch y async, explicando la diferencia entre los dos
+- Secuencial vs concurrente midiendo tiempos reales
+- Productor-consumidor usando Channel, que regula el flujo automaticamente
+- Gestion de errores con try-catch dentro de la corrutina
 
 ---
 
-## Cómo ejecutar el programa
+## Tecnologias utilizadas
+
+- Kotlin
+- Libreria `kotlinx.coroutines`
+
+---
+
+## Como ejecutar el programa
 
 1. Abrir el proyecto en IntelliJ IDEA
 2. Ejecutar el archivo `Main.kt`
@@ -53,12 +60,15 @@ El programa tiene varios ejemplos:
 
 ## Resultados
 
-Se puede observar que:
+Los resultados completos estan en el fichero `RESULTADOS.md`.
 
-* La ejecución concurrente es más rápida que la secuencial
-* Los hilos necesitan más control manual (`synchronized`)
-* Las corrutinas son más fáciles de usar
-* `Channel` facilita la comunicación entre corrutinas
+En resumen:
+
+- Concurrente tarda la mitad que secuencial porque las tareas van a la vez
+- Con hilos hay que controlar el acceso a datos compartidos con synchronized
+- Con corrutinas el Channel lo gestiona solo, el codigo es mas limpio
+- Los tiempos de hilos y corrutinas son muy similares, la ventaja de
+  las corrutinas es que son mas faciles de usar
 
 ---
 
@@ -74,6 +84,8 @@ TrabajoRecuperacionT1-RA2-Kotlin/
 
 ---
 
-## Autor
+## Repositorio
 
-Ximena Meyzen Calderón
+https://github.com/xmeyzzzenx/TrabajoRecuperacionT1-RA2-Kotlin
+
+---
